@@ -75,8 +75,8 @@ class Login extends BaseAuth
         if (env('APP_ENV') === 'local') {
             // fill method is from HasForms interface
             $this->form->fill([
-                'login' => 'admin@example.email',
-                'password' => 'admin@example.email',
+                'login' => 'agent@example.email',
+                'password' => 'agent@example.email',
             ]);
         } else {
             $this->form->fill();
