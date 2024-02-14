@@ -9,4 +9,9 @@ class Commodity extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function entries()
+    {
+        return $this->hasMany(Entry::class);
+    }
 }

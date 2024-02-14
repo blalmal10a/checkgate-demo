@@ -28,12 +28,12 @@ class EntryResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('vehicle_number'),
+                TextInput::make('vehicle_number')->required(),
                 Select::make('commodity_id')
-                    ->options(Commodity::pluck('name', 'id')),
-                TextInput::make('no_of_bags'),
-                TimePicker::make('arrival_time'),
-                TextInput::make('weight_in_quintal'),
+                    ->options(Commodity::pluck('name', 'id'))->required(),
+                TextInput::make('no_of_bags')->required(),
+                TimePicker::make('arrival_time')->required(),
+                TextInput::make('weight_in_quintal')->required(),
             ]);
     }
 
