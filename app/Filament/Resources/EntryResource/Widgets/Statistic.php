@@ -30,11 +30,11 @@ class Statistic extends ChartWidget
         $data = $commodities->pluck('sum_weight_today');
 
 
-        $date = date('d/m-Y');
+        $date = date('d/m/Y');
         return [
             'datasets' => [
                 [
-                    'label' => 'Sum of commodities weight on ' . $date,
+                    'label' => 'Sum of each commodity weight | ' . $date,
                     'data' => $data,
                 ],
             ],
