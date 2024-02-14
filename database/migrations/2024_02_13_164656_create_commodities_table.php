@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('commodities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('order');
+            $table->integer('order')->nullable();
             $table->string('default_unit')->default('ql');
             $table->timestamps();
         });

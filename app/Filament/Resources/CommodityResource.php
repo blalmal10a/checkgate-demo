@@ -26,7 +26,7 @@ class CommodityResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name'),
-                TextInput::make('order'),
+                // TextInput::make('order'),
             ]);
     }
 
@@ -35,7 +35,7 @@ class CommodityResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
-                TextColumn::make('default_unit'),
+                // TextColumn::make('default_unit'),
             ])
             ->filters([
                 //
