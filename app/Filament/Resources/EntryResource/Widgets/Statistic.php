@@ -15,6 +15,8 @@ class Statistic extends ChartWidget
     protected function getData(): array
     {
 
+        return [];
+
         $commodities = Commodity::query();
         $dateRange = [
             date('Y-m-d'),

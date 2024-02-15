@@ -13,4 +13,10 @@ class Entry extends Model
     {
         return $this->belongsTo(Commodity::class);
     }
+
+
+    public function vehicle_check()
+    {
+        return $this->belongsTo(VehicleCheck::class);
+    }
 }

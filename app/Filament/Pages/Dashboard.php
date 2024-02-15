@@ -9,7 +9,7 @@ class Dashboard extends BaseDashboard
 {
     public function getColumns(): int | string | array
     {
-        return  1; // Set the number of columns to  12
+        return  1;
     }
 
     public function widgets(): array
