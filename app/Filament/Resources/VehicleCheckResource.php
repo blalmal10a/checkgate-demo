@@ -48,20 +48,20 @@ class VehicleCheckResource extends Resource
                         'Others' => 'Others',
                     ])
                     ->required(),
-                Section::make('Commodity details')
-                    ->schema([
-                        Repeater::make('entries')
-                            ->label('')
-                            ->relationship('entries')
-                            ->schema([
-                                Select::make('commodity_id')
-                                    ->relationship('commodity', 'name')
-                                    ->placeholder('Select commodity'),
-                                TextInput::make('no_of_bags')->required(),
-                                TextInput::make('weight')->required(),
-                            ])
-                            ->columns(2),
-                    ]),
+                Section::make([
+                    Repeater::make('entries')
+                        ->label('Commodity details')
+                        ->relationship('entries')
+                        ->schema([
+                            Select::make('commodity_id')
+                                ->relationship('commodity', 'name')
+                                ->distinct()
+                                ->placeholder('Select commodity'),
+                            TextInput::make('no_of_bags')->required(),
+                            TextInput::make('weight')->required(),
+                        ])->columns(3)
+                ])
+
 
             ]);
     }
