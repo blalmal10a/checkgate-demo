@@ -15,8 +15,6 @@ class Statistic extends ChartWidget
     protected function getData(): array
     {
 
-        return [];
-
         $commodities = Commodity::query();
         $dateRange = [
             date('Y-m-d'),
@@ -28,7 +26,7 @@ class Statistic extends ChartWidget
             ->whereHas('entries', fn ($entries) => $entries->whereBetween('created_at', $dateRange))
             ->get()->map(
                 function ($item) {
-                    $sum_weight = $item->entries()->sum('weight_in_quintal');
+                    $sum_weight = $item->entries()->sum('weight');
                     $vehicles = $item->entries()->count();
                     $item->sum_of_weights  = $sum_weight;
                     $sum_bags = $item->entries()->sum('no_of_bags');
