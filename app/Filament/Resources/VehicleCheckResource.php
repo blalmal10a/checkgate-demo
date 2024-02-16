@@ -36,7 +36,18 @@ class VehicleCheckResource extends Resource
             ->schema([
                 DateTimePicker::make('date_and_time')->required(),
                 TextInput::make('registration_no')->required(),
-                TextInput::make('vehicle_type')->required(),
+                Select::make('vehicle_type')
+                    ->options([
+                        'Pickup 207',
+                        'Truck 407',
+                        'Tripper',
+                        'Tripper 10 wheeler',
+                        'Tripper 12 wheeler',
+                        'Tripper 14 wheeler',
+                        'Tripper 16 wheeler',
+                        'Others'
+                    ])
+                    ->required(),
                 Section::make('Commodity details')
                     ->schema([
                         Repeater::make('entries')
