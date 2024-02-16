@@ -38,14 +38,14 @@ class VehicleCheckResource extends Resource
                 TextInput::make('registration_no')->required(),
                 Select::make('vehicle_type')
                     ->options([
-                        'Pickup 207',
-                        'Truck 407',
-                        'Tripper',
-                        'Tripper 10 wheeler',
-                        'Tripper 12 wheeler',
-                        'Tripper 14 wheeler',
-                        'Tripper 16 wheeler',
-                        'Others'
+                        'Pickup 207' => 'Pickup 207',
+                        'Truck 407' => 'Truck 407',
+                        'Tripper' => 'Tripper',
+                        'Tripper 10 wheeler' => 'Tripper 10 wheeler',
+                        'Tripper 12 wheeler' => 'Tripper 12 wheeler',
+                        'Tripper 14 wheeler' => 'Tripper 14 wheeler',
+                        'Tripper 16 wheeler' => 'Tripper 16 wheeler',
+                        'Others' => 'Others',
                     ])
                     ->required(),
                 Section::make('Commodity details')
