@@ -37,9 +37,10 @@ class VehicleCheckResource extends Resource
                 DateTimePicker::make('date_and_time')->required(),
                 TextInput::make('registration_no')->required(),
                 TextInput::make('vehicle_type')->required(),
-                Section::make('Entries')
+                Section::make('Commodity details')
                     ->schema([
                         Repeater::make('entries')
+                            ->label('')
                             ->relationship('entries')
                             ->schema([
                                 Select::make('commodity_id')
