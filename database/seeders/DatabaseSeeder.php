@@ -22,11 +22,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('admin@example.email'),
         ]);
 
-        User::factory()->create([
-            'name' => 'Agent',
-            'email' => 'agent@example.email',
-            'password' => bcrypt('agent@example.email'),
-        ]);
 
         $this->call(MeasurementUnitSeeder::class);
         $this->call(CommoditySeeder::class);
