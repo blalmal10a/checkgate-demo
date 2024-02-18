@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\MeasurementUnit;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('commodities', function (Blueprint $table) {
+        Schema::create('measurement_units', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignIdFor(MeasurementUnit::class)->nullable(); //default unit
+            $table->string('name')->nullable();
+            $table->string('abbreviation')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('commodities');
+        Schema::dropIfExists('measurement_units');
     }
 };
