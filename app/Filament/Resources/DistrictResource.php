@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CommodityResource\Pages;
-use App\Filament\Resources\CommodityResource\RelationManagers;
-use App\Models\Commodity;
+use App\Filament\Resources\DistrictResource\Pages;
+use App\Filament\Resources\DistrictResource\RelationManagers;
+use App\Models\District;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -15,9 +15,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CommodityResource extends Resource
+class DistrictResource extends Resource
 {
-    protected static ?string $model = Commodity::class;
+    protected static ?string $model = District::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -25,8 +25,7 @@ class CommodityResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name'),
-                // TextInput::make('order'),
+                TextInput::make('name')
             ]);
     }
 
@@ -35,13 +34,21 @@ class CommodityResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
-                // TextColumn::make('default_unit'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -50,19 +57,10 @@ class CommodityResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCommodities::route('/'),
-            // 'create' => Pages\CreateCommodity::route('/create'),
-            // 'edit' => Pages\EditCommodity::route('/{record}/edit'),
+            'index' => Pages\ManageDistricts::route('/'),
         ];
     }
 }
