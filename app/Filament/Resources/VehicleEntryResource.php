@@ -37,34 +37,32 @@ class VehicleEntryResource extends Resource
                     ->required()
                     ->maxLength(255),
 
+                Repeater::make('commodity_details')
+                    ->label('Commodity details')
+                    ->relationship('commodity_details')
+                    ->columnSpanFull()
+                    ->schema([
+                        Select::make('commodity_id')
+                            ->relationship('commodity', 'name')
+                            ->distinct()
+                            ->placeholder('Select commodity'),
+                        TextInput::make('origin_company')->required(),
+                        TextInput::make('challan_no')->required(),
+                        DatePicker::make('challan_date')->required(),
+                        TextInput::make('agency_name')->required(),
 
-                Section::make([
-                    Repeater::make('commodity_details')
-                        ->label('Commodity details')
-                        ->relationship('commodity_details')
-                        ->schema([
-                            Select::make('commodity_id')
-                                ->relationship('commodity', 'name')
-                                ->distinct()
-                                ->placeholder('Select commodity'),
-                            TextInput::make('origin_company')->required(),
-                            TextInput::make('challan_no')->required(),
-                            DatePicker::make('challan_date')->required(),
-                            TextInput::make('agency_name')->required(),
-
-                            Select::make('district_id')
-                                ->relationship('district', 'name')
-                                ->placeholder('Select district'),
-                            Select::make('measurement_unit_id')
-                                ->relationship('measurement_unit', 'abbreviation'),
-                            TextInput::make('quantity')->numeric()->type('decimal'),
-                            // TextInput::make('no_of_bags')->required(),
-                            TextInput::make('weight')
-                                ->required()
-                                ->numeric()
-                                ->type('decimal'),
-                        ])->columns(3)
-                ])
+                        Select::make('district_id')
+                            ->relationship('district', 'name')
+                            ->placeholder('Select district'),
+                        Select::make('measurement_unit_id')
+                            ->relationship('measurement_unit', 'abbreviation'),
+                        TextInput::make('quantity')->numeric()->type('decimal'),
+                        // TextInput::make('no_of_bags')->required(),
+                        TextInput::make('weight')
+                            ->required()
+                            ->numeric()
+                            ->type('decimal'),
+                    ])->columns(3)
             ]);
     }
 
