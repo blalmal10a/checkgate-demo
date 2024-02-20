@@ -3,6 +3,7 @@
 use App\Models\Commodity;
 use App\Models\District;
 use App\Models\MeasurementUnit;
+use App\Models\VehicleEntry;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,16 +17,16 @@ return new class extends Migration
     {
         Schema::create('commodity_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(VehicleEntry::class);
             $table->foreignIdFor(Commodity::class);
             $table->foreignIdFor(MeasurementUnit::class)->nullable();
             $table->decimal('quantity')->nullable();
-            $table->string('weight_unit')->default('Quintal');
             $table->string('challan_no')->nullable();
             $table->date('challan_date')->nullable();
             $table->string('origin_company')->nullable();
-            $table->string('destination_company')->nullable(); //id ni se duh thu sam
-            $table->string('agency')->nullable(); //destination company //id ni se duh thu sam
+            $table->string('agency_name')->nullable(); //destination company //id ni se duh thu sam
             $table->foreignIdFor(District::class)->nullable();
+            $table->decimal('weight')->nullable();
             $table->timestamps();
         });
     }

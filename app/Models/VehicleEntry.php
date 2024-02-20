@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class VehicleEntry extends Model
 {
     use HasFactory;
+
+    public function commodity_details()
+    {
+        return $this->hasMany(CommodityDetail::class);
+    }
 }

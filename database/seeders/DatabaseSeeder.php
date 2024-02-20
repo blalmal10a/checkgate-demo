@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(MeasurementUnitSeeder::class);
         $this->call(CommoditySeeder::class);
+        $this->call(DistrictSeeder::class);
     }
 }
