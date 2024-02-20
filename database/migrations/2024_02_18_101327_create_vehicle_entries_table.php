@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\MeasurementUnit;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('commodities', function (Blueprint $table) {
+        Schema::create('vehicle_entries', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignIdFor(MeasurementUnit::class)->nullable(); //default unit
+            $table->string('registration_no')->default('N/A');
+            $table->timestamp('crossed_date_time')->nullable();
+            $table->string('driver_name')->default('N/A');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('commodities');
+        Schema::dropIfExists('vehicle_entries');
     }
 };
