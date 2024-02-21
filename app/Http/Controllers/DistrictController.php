@@ -12,7 +12,7 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        //
+        return District::all();
     }
 
     /**
@@ -20,7 +20,6 @@ class DistrictController extends Controller
      */
     public function create()
     {
-        return District::all();
     }
 
     /**
