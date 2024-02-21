@@ -46,6 +46,10 @@ class VehicleEntryResource extends Resource
                             ->relationship('commodity', 'name')
                             ->distinct()
                             ->placeholder('Select commodity'),
+                        Select::make('measurement_unit_id')
+                            ->relationship('measurement_unit', 'abbreviation'),
+                        TextInput::make('quantity')->numeric()->type('decimal'),
+
                         TextInput::make('origin_company')->required(),
                         TextInput::make('challan_no')->required(),
                         DatePicker::make('challan_date')->required(),
@@ -54,13 +58,10 @@ class VehicleEntryResource extends Resource
                         Select::make('district_id')
                             ->relationship('district', 'name')
                             ->placeholder('Select district'),
-                        Select::make('measurement_unit_id')
-                            ->relationship('measurement_unit', 'abbreviation'),
-                        TextInput::make('quantity')->numeric()->type('decimal'),
                         // TextInput::make('no_of_bags')->required(),
                         TextInput::make('weight')
-                            ->required()
                             ->numeric()
+                            ->hint('(if measurement is not weight)')
                             ->type('decimal'),
                     ])->columns(3)
             ]);
