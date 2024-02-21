@@ -12,7 +12,7 @@ class VehicleEntryController extends Controller
      */
     public function index()
     {
-        //
+        return VehicleEntry::paginate(request('rowsPerPage'));
     }
 
     /**
@@ -28,7 +28,14 @@ class VehicleEntryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'registration_no' => 'required',
+            'crossed_date_time' => 'required',
+            'driver_name' => 'required',
+        ]);
+
+        VehicleEntry::create($validated);
+        return $this->index(request());
     }
 
     /**
@@ -44,7 +51,13 @@ class VehicleEntryController extends Controller
      */
     public function edit(VehicleEntry $vehicleEntry)
     {
-        //
+        $validated = request()->validate([
+            'registration_no' => 'required',
+            'crossed_date_time' => 'required',
+            'driver_name' => 'required',
+        ]);
+        $vehicleEntry->update($validated);
+        return $this->index(request());
     }
 
     /**
@@ -52,7 +65,6 @@ class VehicleEntryController extends Controller
      */
     public function update(Request $request, VehicleEntry $vehicleEntry)
     {
-        //
     }
 
     /**
@@ -60,6 +72,7 @@ class VehicleEntryController extends Controller
      */
     public function destroy(VehicleEntry $vehicleEntry)
     {
-        //
+        $vehicleEntry->delete();
+        return $this->index(request());
     }
 }
