@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\VehicleEntryController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('districts', DistrictController::class);
 Route::apiResource('vehicle-entries', VehicleEntryController::class);
+
+Route::get('dfdf', function (Request $request) {
+    $users =  User::get();
+    foreach ($users as $user) {
+        logger($user->id);
+    }
+});
