@@ -51,13 +51,6 @@ class VehicleEntryController extends Controller
      */
     public function edit(VehicleEntry $vehicleEntry)
     {
-        $validated = request()->validate([
-            'registration_no' => 'required',
-            'crossed_date_time' => 'required',
-            'driver_name' => 'required',
-        ]);
-        $vehicleEntry->update($validated);
-        return $this->index(request());
     }
 
     /**
@@ -65,6 +58,13 @@ class VehicleEntryController extends Controller
      */
     public function update(Request $request, VehicleEntry $vehicleEntry)
     {
+        $validated = request()->validate([
+            'registration_no' => 'required',
+            'crossed_date_time' => 'required',
+            'driver_name' => 'required',
+        ]);
+        $vehicleEntry->update($validated);
+        return $this->index(request());
     }
 
     /**
