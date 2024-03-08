@@ -12,7 +12,7 @@ class MeasurementUnitController extends Controller
      */
     public function index()
     {
-        //
+        return MeasurementUnit::all();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommodityController;
 use App\Http\Controllers\DistrictController;
+use App\Http\Controllers\MeasurementUnitController;
 use App\Http\Controllers\VehicleEntryController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('districts', DistrictController::class);
 Route::apiResource('commodities', CommodityController::class);
+Route::apiResource('measurement-units', MeasurementUnitController::class);
 Route::apiResource('vehicle-entries', VehicleEntryController::class);
 
 Route::get('dfdf', function (Request $request) {
