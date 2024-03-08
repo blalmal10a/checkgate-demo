@@ -12,7 +12,7 @@ class CommodityController extends Controller
      */
     public function index()
     {
-        //
+        return Commodity::all();
     }
 
     /**
