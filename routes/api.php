@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommodityController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\VehicleEntryController;
 use App\Models\User;
@@ -22,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('districts', DistrictController::class);
+Route::apiResource('commodities', CommodityController::class);
 Route::apiResource('vehicle-entries', VehicleEntryController::class);
 
 Route::get('dfdf', function (Request $request) {
