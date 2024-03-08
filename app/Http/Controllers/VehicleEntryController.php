@@ -12,7 +12,8 @@ class VehicleEntryController extends Controller
      */
     public function index()
     {
-        return VehicleEntry::paginate(request('rowsPerPage'));
+        return VehicleEntry::with('commodity_details')
+            ->paginate(request('rowsPerPage'));
     }
 
     /**
@@ -34,8 +35,45 @@ class VehicleEntryController extends Controller
             'driver_name' => 'required',
         ]);
 
-        VehicleEntry::create($validated);
-        return $this->index(request());
+        $commodity_details = $request->validate([
+            'commodity_details' => 'required|array|min:1',
+            'commodity_details.*.commodity_id' => 'required',
+            'commodity_details.*.measurement_unit_id' => 'required',
+            'commodity_details.*.quantity' => 'nullable',
+            'commodity_details.*.origin_company' => 'nullable',
+            'commodity_details.*.challan_no' => 'required',
+            'commodity_details.*.challan_date' => 'required|date',
+            'commodity_details.*.agency_name' => 'nullable',
+            'commodity_details.*.district_id' => 'required',
+            'commodity_details.*.weight' => 'nullable',
+        ]);
+
+        // $commodity_details = $request->validate([
+        //     'commodity_details' => 'nullable|array|min:1',
+        //     'commodity_details.*.commodity_id' => 'nullable',
+        //     'commodity_details.*.measurement_unit_id' => 'nullable',
+        //     'commodity_details.*.quantity' => 'nullable',
+        //     'commodity_details.*.origin_company' => 'nullable',
+        //     'commodity_details.*.challan_no' => 'nullable',
+        //     'commodity_details.*.challan_date' => 'nullable|date',
+        //     'commodity_details.*.agency_name' => 'nullable',
+        //     'commodity_details.*.district_id' => 'nullable',
+        //     'commodity_details.*.weight' => 'nullable',
+        // ]);
+        try {
+
+            $vehicleEntry = VehicleEntry::create($validated);
+
+            foreach ($commodity_details['commodity_details'] as $commodityDetail) {
+                $vehicleEntry->commodity_details()->create($commodityDetail);
+            }
+            return $this->index(request());
+        } catch (\Throwable $th) {
+            logger($th->getMessage());
+            return response([
+                'message' => $th->getMessage()
+            ], 500);
+        }
     }
 
     /**
