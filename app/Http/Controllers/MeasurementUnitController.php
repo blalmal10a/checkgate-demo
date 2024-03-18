@@ -28,7 +28,12 @@ class MeasurementUnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'abbreviation' => 'required',
+        ]);
+        MeasurementUnit::create($validated);
+        return $this->index();
     }
 
     /**
@@ -52,7 +57,12 @@ class MeasurementUnitController extends Controller
      */
     public function update(Request $request, MeasurementUnit $measurementUnit)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'abbreviation' => 'required',
+        ]);
+        $measurementUnit->update($validated);
+        return $this->index();
     }
 
     /**
@@ -60,6 +70,7 @@ class MeasurementUnitController extends Controller
      */
     public function destroy(MeasurementUnit $measurementUnit)
     {
-        //
+        $measurementUnit->delete();
+        return $this->index();
     }
 }
