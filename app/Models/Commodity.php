@@ -14,4 +14,8 @@ class Commodity extends Model
     {
         return $this->hasMany(Entry::class);
     }
+    public function measurement_unit()
+    {
+        return $this->belongsTo(MeasurementUnit::class);
+    }
 }
