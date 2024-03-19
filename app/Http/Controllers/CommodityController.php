@@ -28,7 +28,14 @@ class CommodityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'name' => 'required',
+            'measurement_unit_id' => 'required',
+        ]);
+        Commodity::create($validated);
+
+        return $this->index(request());
     }
 
     /**
@@ -52,7 +59,13 @@ class CommodityController extends Controller
      */
     public function update(Request $request, Commodity $commodity)
     {
-        //
+
+        $validated = $request->validate([
+            'name' => 'required',
+            'measurement_unit_id' => 'required',
+        ]);
+        $commodity->update($validated);
+        return $this->index(request());
     }
 
     /**
@@ -60,6 +73,7 @@ class CommodityController extends Controller
      */
     public function destroy(Commodity $commodity)
     {
-        //
+        $commodity->delete();
+        return $this->index(request());
     }
 }
