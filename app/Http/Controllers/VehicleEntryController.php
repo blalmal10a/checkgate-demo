@@ -12,7 +12,8 @@ class VehicleEntryController extends Controller
      */
     public function index()
     {
-        return VehicleEntry::with('commodity_details')
+        return VehicleEntry::query()
+            // ->with('commodity_details')
             ->paginate(request('rowsPerPage'));
     }
 
@@ -81,7 +82,7 @@ class VehicleEntryController extends Controller
      */
     public function show(VehicleEntry $vehicleEntry)
     {
-        //
+        return $vehicleEntry->load('commodity_details');
     }
 
     /**
