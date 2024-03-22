@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CommodityDetail;
 use App\Models\VehicleEntry;
 use Illuminate\Http\Request;
 
@@ -102,7 +103,38 @@ class VehicleEntryController extends Controller
             'crossed_date_time' => 'required',
             'driver_name' => 'required',
         ]);
+
+        $request->validate([
+            'commodity_details' => 'required|array|min:1',
+            'commodity_details.*.commodity_id' => 'required',
+            'commodity_details.*.measurement_unit_id' => 'required',
+            'commodity_details.*.quantity' => 'nullable',
+            'commodity_details.*.origin_company' => 'nullable',
+            'commodity_details.*.challan_no' => 'required',
+            'commodity_details.*.challan_date' => 'required|date',
+            'commodity_details.*.agency_name' => 'nullable',
+            'commodity_details.*.district_id' => 'required',
+            'commodity_details.*.weight' => 'nullable',
+        ]);
+
+        $commodity_details = request('commodity_details');
+        $existingDetails = $vehicleEntry->commodity_details;
+
+        foreach ($commodity_details as $detail) {
+            unset($detail['commodity']);
+            if (isset($detail['id'])) {
+                $commodityDetail = $existingDetails->firstWhere('id', $detail['id']);
+                $commodityDetail->update($detail);
+            } else if ($detail) {
+                try {
+                    $vehicleEntry->commodity_details()->create($detail);
+                } catch (\Throwable $th) {
+                    logger($th->getMessage());
+                }
+            }
+        }
         $vehicleEntry->update($validated);
+        // return response(['message' => 'dfdf'], 400);
         return $this->index(request());
     }
 
