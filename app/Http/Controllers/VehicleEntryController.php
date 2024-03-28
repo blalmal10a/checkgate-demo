@@ -83,7 +83,7 @@ class VehicleEntryController extends Controller
      */
     public function show(VehicleEntry $vehicleEntry)
     {
-        return $vehicleEntry->load('commodity_details');
+        return $vehicleEntry->load('commodity_details.commodity');
     }
 
     /**
@@ -134,7 +134,9 @@ class VehicleEntryController extends Controller
             }
         }
         $vehicleEntry->update($validated);
-        // return response(['message' => 'dfdf'], 400);
+        if (request('deleted_commodity_detail_ids')) {
+            //
+        }
         return $this->index(request());
     }
 
